@@ -1,10 +1,10 @@
-from rest_framework import viewsets, generics
+from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
+
 
 from .models import Article, ReadPost
-from .serializers import ArticleSerializer
+from .serializers import ArticleSerializer, ReadPostSerializer
 from .permissions import IsAdminOrAuthor
 
 
@@ -23,10 +23,20 @@ class ArticlesDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrAuthor, )
 
 
-# class ReadPostView(generics.CreateAPIView):
-#     queryset = ReadPost.objects.all()
-#     serializer_class = ReadPostSerializer
-#     permission_classes = (IsAuthenticated,)
+class ReadPostView(generics.CreateAPIView):
+    serializer_class = ReadPostSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+        if not pk:
+            return Response({'error': 'Отсутствует ключ PK'}, status=status.HTTP_400_BAD_REQUEST)
+        article = Article.objects.get(pk=pk)
+        user = self.request.user
+        if len(ReadPost.objects.filter(user=user, article=article)) >= 1:
+            return Response({'message': 'Статья уже прочитана'}, status=status.HTTP_409_CONFLICT)
+        ReadPost.objects.create(article=article, user=user, read=True)
+        return Response({'message': 'Прочитано'}, status=status.HTTP_201_CREATED)
 
 
 

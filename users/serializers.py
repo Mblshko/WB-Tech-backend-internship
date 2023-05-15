@@ -5,8 +5,9 @@ from article.models import Article
 
 
 class UserSerializer(serializers.ModelSerializer):
-    articles = serializers.PrimaryKeyRelatedField(many=True, queryset=Article.objects.all())
+    articles = serializers.SlugRelatedField(slug_field='title', many=True, queryset=Article.objects.all())
 
     class Meta:
         model = User
         fields = ['id', 'username', 'articles']
+

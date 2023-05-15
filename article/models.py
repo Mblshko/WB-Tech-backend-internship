@@ -14,10 +14,15 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = 'Ститья'
         verbose_name_plural = 'Статьи'
 
 
 class ReadPost(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    read = models.BooleanField(default=False)
+    article = models.ForeignKey(Article, related_name='read', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    read = models.BooleanField(default=False, verbose_name='Прочитано')
+
+    class Meta:
+        verbose_name = 'Прочитанный пост'
+        verbose_name_plural = 'Прочитанные посты'
