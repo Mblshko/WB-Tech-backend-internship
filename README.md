@@ -17,4 +17,4 @@
 ### `pip install -r requirements.txt`
 
 ---
-### Полное условие задания находится в файле [Task_WB—Tech_InternBackend.pdf]((http://yandex.ru))
+### Полное условие задания находится в файле [Task_WB—Tech_InternBackend.pdf](https://github.com/Mblshko/WB-Tech-backend-internship/blob/master/Task_WB%E2%80%94Tech_InternBackend.pdf)
