@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .yasg import urlpatterns as doc_urls
 
 
 
@@ -26,3 +27,5 @@ urlpatterns = [
     path('api/v1/articles/', include('article.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += doc_urls

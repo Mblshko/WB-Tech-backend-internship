@@ -24,6 +24,7 @@ class ArticlesDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ReadPostView(generics.CreateAPIView):
+    queryset = ReadPost.objects.all()
     serializer_class = ReadPostSerializer
     permission_classes = (IsAuthenticated,)
 
