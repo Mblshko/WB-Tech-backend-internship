@@ -1,11 +1,11 @@
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
 
 from .models import Article
 from .serializers import ArticleSerializer
-from django.contrib.auth.models import User
 
 
 class ArticleTests(APITestCase):
