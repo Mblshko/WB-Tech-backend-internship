@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from article.models import Article, ReadPost
+from article.models import Article, ReadArticle
 
 
 class ReadPostSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class ReadPostSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
-        model = ReadPost
+        model = ReadArticle
         fields = '__all__'
 
 

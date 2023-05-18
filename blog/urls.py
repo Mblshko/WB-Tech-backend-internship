@@ -15,17 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from .yasg import urlpatterns as doc_urls
 
 
-
-
 urlpatterns = [
-    path('api/v1/auth/', include('rest_framework.urls')),
+    path('admin/', admin.site.urls),
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('api/v1/users/', include('users.urls')),
     path('api/v1/articles/', include('article.urls')),
-    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += doc_urls

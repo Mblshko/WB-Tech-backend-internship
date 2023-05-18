@@ -18,7 +18,7 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
-class ReadPost(models.Model):
+class ReadArticle(models.Model):
     article = models.ForeignKey(Article, related_name='read', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     read = models.BooleanField(default=False, verbose_name='Прочитано')
