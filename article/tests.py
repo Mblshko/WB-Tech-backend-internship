@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 class ArticleTests(APITestCase):
-    '''Тестирование Articles и ReadPost'''
+    '''Тестирование Articles и ReadArticle'''
     def setUp(self):
         self.user_test1 = User.objects.create_user(username='user_test1', password='qwer1234')
         self.token_user_test1 = Token.objects.create(user=self.user_test1)
