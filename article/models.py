@@ -26,12 +26,3 @@ class ReadArticle(models.Model):
     class Meta:
         verbose_name = 'Прочитанный пост'
         verbose_name_plural = 'Прочитанные посты'
-
-# class ReadPost(models.Model):
-#     article = models.ForeignKey(Article, related_name='read', on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
-#     read = models.BooleanField(default=False, verbose_name='Прочитано')
-#
-#     class Meta:
-#         verbose_name = 'Прочитанный пост'
-#         verbose_name_plural = 'Прочитанные посты'
