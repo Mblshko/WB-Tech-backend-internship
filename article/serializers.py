@@ -3,7 +3,7 @@ from rest_framework import serializers
 from article.models import Article, ReadArticle
 
 
-class ReadPostSerializer(serializers.ModelSerializer):
+class ReadArticleSerializer(serializers.ModelSerializer):
     article = serializers.ReadOnlyField(source='article.title')
     user = serializers.ReadOnlyField(source='user.username')
 

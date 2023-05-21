@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 from .models import Article, ReadArticle
-from .serializers import ArticleSerializer, ReadPostSerializer
+from .serializers import ArticleSerializer, ReadArticleSerializer
 from .permissions import IsAdminOrAuthor
 
 
@@ -23,9 +23,9 @@ class ArticlesDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrAuthor, )
 
 
-class ReadPostView(generics.CreateAPIView):
+class ReadArticleView(generics.CreateAPIView):
     queryset = ReadArticle.objects.all()
-    serializer_class = ReadPostSerializer
+    serializer_class = ReadArticleSerializer
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
@@ -36,5 +36,5 @@ class ReadPostView(generics.CreateAPIView):
         user = self.request.user
         if len(ReadArticle.objects.filter(user=user, article=article)) >= 1:
             return Response({'message': 'Статья уже прочитана'}, status=status.HTTP_409_CONFLICT)
-        ReadArticle.objects.create(article=article, user=user, read=True)
+        ReadArticle.objects.create(article=article, user=user, subscriber=True)
         return Response({'message': 'Прочитано'}, status=status.HTTP_201_CREATED)
