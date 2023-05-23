@@ -24,6 +24,7 @@ class ArticleTests(APITestCase):
 
     def test_article_detail(self):
         response = self.client.get(reverse('article_detail', kwargs={'pk': self.article.id}))
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         serialaizer_data = ArticleSerializer(self.article).data
         self.assertEqual(serialaizer_data, response.data)
