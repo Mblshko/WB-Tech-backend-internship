@@ -1,10 +1,12 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+from .views import ArticlesViewSet, ReadArticleView
 
-from .views import ArticlesList, ArticlesDetail, ReadArticleView
 
+router = routers.DefaultRouter()
+router.register(r'', ArticlesViewSet, basename='articles')
 
 urlpatterns = [
-    path('', ArticlesList.as_view(), name='articles_list'),
-    path('<int:pk>/', ArticlesDetail.as_view(), name='article_detail'),
+    path('', include(router.urls)),
     path('<int:pk>/read/', ReadArticleView.as_view(), name='article_read')
 ]

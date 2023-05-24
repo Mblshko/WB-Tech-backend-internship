@@ -21,7 +21,7 @@ class Article(models.Model):
 class ReadArticle(models.Model):
     article = models.ForeignKey(Article, related_name='read', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
-    read = models.BooleanField(default=False, verbose_name='Прочитано')
+    read = models.BooleanField(default=True, verbose_name='Прочитано')
 
     class Meta:
         verbose_name = 'Прочитанный пост'

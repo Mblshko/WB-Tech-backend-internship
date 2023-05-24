@@ -18,24 +18,24 @@ class ArticleTests(APITestCase):
         self.article_data = {'title': self.article.title, 'content': self.article.content}
 
     def test_article_list(self):
-        response = self.client.get(reverse('articles_list'))
+        response = self.client.get(reverse('articles-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['results']), 1)
 
     def test_article_detail(self):
-        response = self.client.get(reverse('article_detail', kwargs={'pk': self.article.id}))
+        response = self.client.get(reverse('articles-detail', kwargs={'pk': self.article.id}))
         print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         serialaizer_data = ArticleSerializer(self.article).data
         self.assertEqual(serialaizer_data, response.data)
 
     def test_article_create_invalid(self):
-        response = self.client.post(reverse('articles_list'), self.article_data)
+        response = self.client.post(reverse('articles-list'), self.article_data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_article_create_valid(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token_user_test1.key)
-        response = self.client.post(reverse('articles_list'), self.article_data)
+        response = self.client.post(reverse('articles-list'), self.article_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_read_article(self):
