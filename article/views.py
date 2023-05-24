@@ -14,10 +14,8 @@ class ArticlesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Article.objects.filter(is_published=True)
         read_filter = self.request.query_params.get('read', None)
-        print(read_filter)
         if read_filter == 'True':
             queryset = queryset.filter(read__read=1)
-            print(queryset)
         elif read_filter == 'False':
             queryset = queryset.exclude(read__read=True)
         return queryset
